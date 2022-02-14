@@ -16,15 +16,14 @@
                 id="firstname" 
                 name="firstname"
                 placeholder="First Name"
-                required
                 formControlName="firstname" 
-                [ngClass]="{'is-invalid': (signupForm.get('firstname')!.touched || signupForm.get('firstname')!.dirty && !signupForm.valid)}"
-                minlength="3" />
+                [ngClass]="{'is-invalid': (signupForm.get('firstname')?.touched || signupForm.get('firstname')?.dirty && !signupForm.valid)}"
+                />
                 <span class="invalid-feedback">
-                    <span *ngIf="signupForm.get('firstName')!.errors?.['required']">
+                    <span *ngIf="signupForm.get('firstname')?.errors?.['required']">
                       Please enter your first name.
                     </span>
-                    <span *ngIf="signupForm.get('firstName')!.errors?.['minlength']">
+                    <span *ngIf="signupForm.get('firstname')?.errors?.['minlength']">
                       The first name must be longer than 3 characters.
                     </span>
                 </span>
@@ -32,50 +31,75 @@
             <div class="form-control-custom">
                 <label for="username">Last Name</label>
                 <input type="text" id="lastname" name="lastname" placeholder="Last Name"
-                required
                 formControlName="lastname" 
-                [ngClass]="{'is-invalid': (signupForm.get('lastname')!.touched || signupForm.get('lastname')!.dirty && !signupForm.valid)}"
-                minlength="3" />
+                [ngClass]="{'is-invalid': (signupForm.get('lastname')?.touched || signupForm.get('lastname')?.dirty && !signupForm.valid)}"
+                 />
                 <span class="invalid-feedback">
-                    <span *ngIf="signupForm.get('lastname').errors?.['required']">
+                    <span *ngIf="signupForm.get('lastname')?.errors?.['required']">
                       Please enter your first name.
                     </span>
-                    <span *ngIf="signupForm.get('lastname').errors?.['minlength']">
+                    <span *ngIf="signupForm.get('lastname')?.errors?.['minlength']">
                       The first name must be longer than 3 characters.
                     </span>
                 </span>
             </div>
             <div class="form-control-custom">
                 <label for="username">Email</label>
-                <input type="text" id="emailid" name="emailid" placeholder="Enter Email Address"                    formControlName="confirmEmail"
-                [ngClass]="{'is-invalid': signupForm.get('emailGroup').errors ||
-                ((signupForm.get('emailGroup.confirmEmail').touched || 
-                signupForm.get('emailGroup.confirmEmail').dirty) && 
-                !signupForm.get('emailGroup.confirmEmail').valid) }" />
-         <span class="invalid-feedback">
-           <span *ngIf="signupForm.get('emailGroup.confirmEmail').errors?.required">
-             Please confirm your email address.
-           </span>
-           <span *ngIf="signupForm.get('emailGroup').errors?.match">
-             The confirmation does not match the email address.
-           </span>
-         </span>
+                <input type="email" id="emailid" name="emailid" placeholder="Enter Email Address"
+                formControlName="email" 
+                [ngClass]="{'is-invalid': (signupForm.get('email')?.touched || signupForm.get('email')?.dirty && !signupForm.valid)}"
+                 />
+                <span class="invalid-feedback">
+                    <span *ngIf="signupForm.get('email')?.errors?.['required']">
+                      Please enter your Email
+                    </span>
+                    <span *ngIf="signupForm.get('email')?.errors?.['email']">
+                        Please enter the Valid Email
+                    </span>
+                </span>
             </div>
+            <div formGroupName="passwordGroup">
             <div class="form-control-custom">
                 <label for="username">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter Password">
-                <i class="fas fa-check-circle"></i>
-                <i class="fas fa-exclamation-circle"></i>
-                <small>Error message</small>
+                <input type="password" id="password" name="password" placeholder="Enter Password"
+                [ngClass]="{'is-invalid': signupForm.get('passwordGroup')?.errors ||
+                                             ((signupForm.get('passwordGroup.password')?.touched || 
+                                             signupForm.get('passwordGroup.password')?.dirty) && 
+                                              !signupForm.get('passwordGroup.password')?.valid) }"
+                formControlName="password"
+                />
+                <span class="invalid-feedback">
+                    <span *ngIf="signupForm.get('passwordGroup.password')?.errors?.['required']">
+                      Please enter your Password.
+                    </span>
+                    <span *ngIf="signupForm.get('passwordGroup.password')?.errors?.['minlength']">
+                      The Password must be longer than 6 characters.
+                    </span>
+                </span>
             </div>
             <div class="form-control-custom">
                 <label for="username">Confirm Password</label>
-                <input type="password" id="cpassword" name="cpassword" placeholder="Confirm Password">
-                <i class="fas fa-check-circle"></i>
-                <i class="fas fa-exclamation-circle"></i>
-                <small>Error message</small>
+                <input type="password" id="cpassword" name="cpassword" placeholder="Confirm Password"
+                [ngClass]="{'is-invalid': signupForm.get('passwordGroup')?.errors ||
+                                             ((signupForm.get('passwordGroup.cpassword')?.touched || 
+                                             signupForm.get('passwordGroup.cpassword')?.dirty) && 
+                                              !signupForm.get('passwordGroup.cpassword')?.valid) }"
+                formControlName="cpassword"
+                />
+                <span class="invalid-feedback">
+                <span *ngIf="signupForm.get('passwordGroup.cpassword')?.errors?.['required']">
+                    Please enter your Password.
+                  </span>
+                  <span *ngIf="signupForm.get('passwordGroup.cpassword')?.errors?.['minlength']">
+                    The Password must be longer than 6 characters.
+                  </span>
+                    <span *ngIf="signupForm.get('passwordGroup')?.errors?.['match']">
+                        The confirmation does not match the Password.
+                      </span>
+                </span>
             </div>
-                <button type="submit" name="submit"
+        </div>
+                <button type="button" name="submit"
                 [title]="signupForm.valid ? 'Save Your entered data': 'Disabled'" 
                  [disabled]="!signupForm.valid">Submit</button>
                  <br>Dirty: {{ signupForm.dirty }}
