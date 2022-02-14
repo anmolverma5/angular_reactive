@@ -5,31 +5,61 @@
     <!--<script defer src="./assets/js/signup.js"> </script>-->
     <!-- Sign UP -->
     <div class="container">
-        <form   class="form">
+        <form novalidate [formGroup]="signupForm" (ngSubmit)="save()"   class="form">
             <div class="header">
                 <h2 style="color:#9b59b6">SignUp </h2>
             </div>
             <div class="form-control-custom">
                 <label for="username">First Name</label>
-                <input type="text" id="fname" name="fname" placeholder="First Name" maxlength="20">
-                <i class="fas fa-check-circle"></i>
-                <i class="fas fa-exclamation-circle"></i>
-                <small>Error message</small>
+                <input 
+                type="text" 
+                id="firstname" 
+                name="firstname"
+                placeholder="First Name"
+                required
+                formControlName="firstname" 
+                [ngClass]="{'is-invalid': (signupForm.get('firstname')!.touched || signupForm.get('firstname')!.dirty && !signupForm.valid)}"
+                minlength="3" />
+                <span class="invalid-feedback">
+                    <span *ngIf="signupForm.get('firstName')!.errors?.['required']">
+                      Please enter your first name.
+                    </span>
+                    <span *ngIf="signupForm.get('firstName')!.errors?.['minlength']">
+                      The first name must be longer than 3 characters.
+                    </span>
+                </span>
             </div>
             <div class="form-control-custom">
                 <label for="username">Last Name</label>
-                <input type="text" id="lname" name="lname" placeholder="Last Name">
-                <i class="fas fa-check-circle"></i>
-                <i class="fas fa-exclamation-circle"></i>
-                <small>Error message</small>
+                <input type="text" id="lastname" name="lastname" placeholder="Last Name"
+                required
+                formControlName="lastname" 
+                [ngClass]="{'is-invalid': (signupForm.get('lastname')!.touched || signupForm.get('lastname')!.dirty && !signupForm.valid)}"
+                minlength="3" />
+                <span class="invalid-feedback">
+                    <span *ngIf="signupForm.get('lastname').errors?.['required']">
+                      Please enter your first name.
+                    </span>
+                    <span *ngIf="signupForm.get('lastname').errors?.['minlength']">
+                      The first name must be longer than 3 characters.
+                    </span>
+                </span>
             </div>
             <div class="form-control-custom">
                 <label for="username">Email</label>
-                <input type="text" id="emailid" name="emailid" placeholder="Enter Email Address" size="18" maxlength=50>
-                <span id="availablitiy"></span>
-                <i class="fas fa-check-circle"></i>
-                <i class="fas fa-exclamation-circle"></i>
-                <small>Error message</small>
+                <input type="text" id="emailid" name="emailid" placeholder="Enter Email Address"                    formControlName="confirmEmail"
+                [ngClass]="{'is-invalid': signupForm.get('emailGroup').errors ||
+                ((signupForm.get('emailGroup.confirmEmail').touched || 
+                signupForm.get('emailGroup.confirmEmail').dirty) && 
+                !signupForm.get('emailGroup.confirmEmail').valid) }" />
+         <span class="invalid-feedback">
+           <span *ngIf="signupForm.get('emailGroup.confirmEmail').errors?.required">
+             Please confirm your email address.
+           </span>
+           <span *ngIf="signupForm.get('emailGroup').errors?.match">
+             The confirmation does not match the email address.
+           </span>
+         </span>
             </div>
             <div class="form-control-custom">
                 <label for="username">Password</label>
@@ -45,9 +75,16 @@
                 <i class="fas fa-exclamation-circle"></i>
                 <small>Error message</small>
             </div>
-                <button type="button" name="submit" >Submit</button>
+                <button type="submit" name="submit"
+                [title]="signupForm.valid ? 'Save Your entered data': 'Disabled'" 
+                 [disabled]="!signupForm.valid">Submit</button>
+                 <br>Dirty: {{ signupForm.dirty }}
+                 <br>Touched: {{ signupForm.touched }}
+                 <br>Valid: {{ signupForm.valid }}
+                 <br>Value: {{ signupForm.value | json }}
         </form>
     </div>
+
 </body>
 
 </html>

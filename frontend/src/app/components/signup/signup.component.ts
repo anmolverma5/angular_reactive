@@ -8,13 +8,14 @@ import { Users } from 'src/app/model/Users';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-  signiupForm?: FormGroup;
+  signupForm!: FormGroup;
+  save: any;
   users = new Users();
 
   constructor() { }
 
   ngOnInit(): void {
-    this.signiupForm = new FormGroup({
+    this.signupForm = new FormGroup({
       firstname: new FormControl(),
       lastname: new FormControl(),
       email: new FormControl(),
