@@ -62,11 +62,11 @@
             <div class="form-control-custom">
                 <label for="username">Password</label>
                 <input type="password" id="password" name="password" placeholder="Enter Password"
-                [ngClass]="{'is-invalid': signupForm.get('passwordGroup')?.errors ||
-                                             ((signupForm.get('passwordGroup.password')?.touched || 
-                                             signupForm.get('passwordGroup.password')?.dirty) && 
-                                              !signupForm.get('passwordGroup.password')?.valid) }"
                 formControlName="password"
+                [ngClass]="{'is-invalid': signupForm.get('passwordGroup')?.errors ||
+                ((signupForm.get('passwordGroup.password')?.touched || 
+                signupForm.get('passwordGroup.password')?.dirty) && 
+                 !signupForm.get('passwordGroup.password')?.valid) }" 
                 />
                 <span class="invalid-feedback">
                     <span *ngIf="signupForm.get('passwordGroup.password')?.errors?.['required']">
@@ -80,11 +80,11 @@
             <div class="form-control-custom">
                 <label for="username">Confirm Password</label>
                 <input type="password" id="cpassword" name="cpassword" placeholder="Confirm Password"
-                [ngClass]="{'is-invalid': signupForm.get('passwordGroup')?.errors ||
-                                             ((signupForm.get('passwordGroup.cpassword')?.touched || 
-                                             signupForm.get('passwordGroup.cpassword')?.dirty) && 
-                                              !signupForm.get('passwordGroup.cpassword')?.valid) }"
                 formControlName="cpassword"
+                [ngClass]="{'is-invalid': signupForm.get('passwordGroup')?.errors ||
+                ((signupForm.get('passwordGroup.cpassword')?.touched || 
+                signupForm.get('passwordGroup.cpassword')?.dirty) && 
+                 !signupForm.get('passwordGroup.cpassword')?.valid) }" 
                 />
                 <span class="invalid-feedback">
                 <span *ngIf="signupForm.get('passwordGroup.cpassword')?.errors?.['required']">

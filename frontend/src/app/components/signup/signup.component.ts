@@ -4,13 +4,14 @@ import { Users } from 'src/app/model/Users';
 
 
 function confirm_password(): ValidatorFn{
-  return(c: AbstractControl): {[key:string]: boolean} | null | any => {
+  return(c: AbstractControl): { [key: string]: boolean } | null | any => {
     let password = c.get('password');
     let cpassword = c.get('cpassword');
+    alert(cpassword);
     if (password?.pristine || cpassword?.pristine){
       return null;
     }
-    if(password?.value === cpassword?.value){
+    if(password?.value !== cpassword?.value){
     return false;
     }
     return {'match': true};
@@ -36,7 +37,7 @@ export class SignupComponent implements OnInit {
       email: ['',[ Validators.required, Validators.email]],
       passwordGroup: this.fb.group({
         password: ['', [Validators.required,Validators.minLength(6)]],
-      cpassword: ['', [Validators.required,Validators.minLength(6)]]
+      cpassword: ['', [Validators.required]]
       }, {validators: confirm_password}),      
     })
     // this.signupForm = new FormGroup({
