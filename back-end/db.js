@@ -1,4 +1,3 @@
-
 "use strict";
 
 var cfg = require("./knex-cfg");
