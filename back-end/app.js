@@ -9,13 +9,13 @@ var fs = require('fs');
 var http = require('http');
 var express = require('express');
 var bodyParser = require('body-parser');
-const app =  express();
+const app = express();
 const { validationResult } = require('express-validator');
 
 
 const store = require('./route/store.js')
 
-const port =  process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
 
 
@@ -41,63 +41,63 @@ app.use(function (req, res, next) {
 });
 app.use(bodyParser.json());
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+    console.log(`Example app listening at http://localhost:${port}`);
 });
 app.get('/getusers', (req, res) => {
-users.listUsers().then(function(result){
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(result));
-   screen.write(result , "pretty");
-})
-.catch(function(err){
-    screen.write('get users not working');
-    screen.write(err);
-})
+    users.listUsers().then(function (result) {
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify(result));
+        screen.write(result, "pretty");
+    })
+        .catch(function (err) {
+            screen.write('get users not working');
+            screen.write(err);
+        })
 });
 
 app.post('/users', (req, res) => {
     // TODO insert user
 
     // console.log(req.body);
-const firstname = req.body.firstname ? req.body.firstname : '';
-const lastname = req.body.lastname ? req.body.lastname : '';
-const email = req.body.email ? req.body.email : '';
-const password = req.body.password ? req.body.password : '';
-// bcrypt.hash(req.body.password,10).then((hash)=>{
-//         password: hash
-//     })
-console.log(firstname);
+    const firstname = req.body.firstname ? req.body.firstname : '';
+    const lastname = req.body.lastname ? req.body.lastname : '';
+    const email = req.body.email ? req.body.email : '';
+    const password = req.body.password ? req.body.password : '';
+    // bcrypt.hash(req.body.password,10).then((hash)=>{
+    //         password: hash
+    //     })
+    console.log(firstname);
 
-if (!firstname) {
-    return res.json({success: false, message: 'firstname is required'});
-}else if (!lastname){
-    return res.json({success: false, message: 'lastname is required'});
-}else if (!email){
-    return res.json({success: false, message: 'email is required'});
-}else if (!password){
-    return res.json({success: false, message: 'password is required'});
-}
-knex('users')
-    .insert({firstname,lastname,email, password})
-    .then((id) => {
-    //get user by id
+    if (!firstname) {
+        return res.json({ success: false, message: 'firstname is required' });
+    } else if (!lastname) {
+        return res.json({ success: false, message: 'lastname is required' });
+    } else if (!email) {
+        return res.json({ success: false, message: 'email is required' });
+    } else if (!password) {
+        return res.json({ success: false, message: 'password is required' });
+    }
     knex('users')
-        .select({
-        id: 'id',
-        firstname: 'firstname',
-        lastname: 'lastname',
-        email: 'email',
-        password: 'password',
-    })
-        .where({id})
-        .then((users) => {
-        return res.json(users[0]);
-    })
-})
-    .catch((err) => {
-    console.error(err);
-    return res.json({success: false, message: 'An error occurred, please try again later.'});
-});
+        .insert({ firstname, lastname, email, password })
+        .then((id) => {
+            //get user by id
+            knex('users')
+                .select({
+                    id: 'id',
+                    firstname: 'firstname',
+                    lastname: 'lastname',
+                    email: 'email',
+                    password: 'password',
+                })
+                .where({ id })
+                .then((users) => {
+                    return res.json(users[0]);
+                })
+        })
+        .catch((err) => {
+            console.error(err);
+            return res.json({ success: false, message: 'An error occurred, please try again later.' });
+        });
 });
 
 

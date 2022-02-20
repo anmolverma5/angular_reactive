@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { NavigationExtras, Router } from '@angular/router';
 import { Users } from 'src/app/model/Users';
+import { ApiService } from './api.service';
 
 
 function confirm_password(): ValidatorFn {
@@ -27,8 +29,9 @@ function confirm_password(): ValidatorFn {
 export class SignupComponent implements OnInit {
   signupForm!: FormGroup;
   users = new Users();
-
-  constructor(private fb: FormBuilder) { }
+  model: any;
+  service: any;
+  constructor(private fb: FormBuilder, private apiService: ApiService, private router: Router) { }
 
   ngOnInit(): void {
     this.signupForm = this.fb.group({
@@ -40,17 +43,16 @@ export class SignupComponent implements OnInit {
         cpassword: ['', [Validators.required]]
       }, { validators: confirm_password }),
     })
-    // this.signupForm = new FormGroup({
-    //   firstname: new FormControl(),
-    //   lastname: new FormControl(),
-    //   email: new FormControl(),
-    //   password: new FormControl(),
-    //   cpassword: new FormControl()
-    // });
   }
   save(): void {
     console.log(this.signupForm);
     console.log('Saved: ' + JSON.stringify(this.signupForm.value));
+    this.apiService.addPerson(this.signupForm.value)
+      .subscribe(data => {
+        console.warn(data)
+        var anmol = 'anmol@gmail.com';
+        const navigationExtras: NavigationExtras = { state: { data: 'Registerd successfully' } };
+        this.router.navigate(['/login'], navigationExtras);
+      })
   }
-
 }

@@ -24,7 +24,9 @@ export class LoginComponent implements OnInit {
   save() {
     console.log(this.loginForm);
     console.log("save: " + JSON.stringify(this.loginForm.value));
-    this.loginService.authenticateUser(this.loginForm.value).subscribe(console.log)
+    this.loginService.authenticateUser(this.loginForm.value).subscribe((token: any) => {
+      localStorage.setItem('userToken', token);
+    })
   }
 
 }
