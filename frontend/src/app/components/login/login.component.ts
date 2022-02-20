@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Users } from 'src/app/model/Users';
+import { LoginServiceService } from './login-service.service';
 
 @Component({
   selector: 'app-login',
@@ -10,17 +11,22 @@ import { Users } from 'src/app/model/Users';
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   users = new Users();
-  constructor() { }
+
+  constructor(private fb: FormBuilder,
+    private loginService: LoginServiceService) { }
 
   ngOnInit(): void {
-    this.loginForm = new FormGroup({
-    email: new FormControl(),
-    password: new FormControl()
+    this.loginForm = this.fb.group({
+      email: ['anmol@gmail.com'],
+      password: ['12345678']
     })
   }
-  save(){
+  save() {
     console.log(this.loginForm);
     console.log("save: " + JSON.stringify(this.loginForm.value));
+    this.loginService.authenticateUser(this.loginForm.value).subscribe((token: any) => {
+      localStorage.setItem('userToken', token);
+    })
   }
 
 }
