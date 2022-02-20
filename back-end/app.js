@@ -58,7 +58,7 @@ users.listUsers().then(function(result){
 app.post('/users', (req, res) => {
     // TODO insert user
 
-    console.log(req.body);
+    // console.log(req.body);
 const firstname = req.body.firstname ? req.body.firstname : '';
 const lastname = req.body.lastname ? req.body.lastname : '';
 const email = req.body.email ? req.body.email : '';
