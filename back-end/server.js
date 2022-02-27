@@ -64,7 +64,7 @@ function authenticateToken(req, res, next) {
 app.use("/api/authenticate", authenticate);
 app.use("/users", register);
 app.use("/userData", authenticateToken, userData);
-app.use("/logout", authenticateToken, logout);
+app.use("/logout", logout);
 
 
 
