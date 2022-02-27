@@ -29,30 +29,12 @@ router.post('/',
                 }
                 var pass = result[0].password;
                 if (password === pass) {
-                    // const token = jwt.sign({ userID: userId }, 'local-website', {
-                    //     expiresIn: '2h'
-                    // });
                     var privateKey = ('../private.key');
                     var token = jwt.sign({ email: "email" }, "" + process.env.JWT_KEY, {
                         expiresIn: "1h"
                     });
-                    // jwt.sign({ email: "email" }, "" + process.env.JWT_KEY, function (err, token) {
-                    //     console.log(token);
-                    //     res.send({ token });
-                    //     return res.json({
-                    //         success: 1,
-                    //         message: 'login successfully',
-                    //         token: token
-                    //     });
-                    // });
+
                     res.status(200).send({ auth: true, token: token });
-                    // res.send({ token });
-                    // return res.json({
-                    //     success: 1,
-                    //     message: 'login successfully',
-                    //     token: token
-                    // });
-                    // console.log('login Successfully');
                 } else {
                     // failed login
                     console.log('Password Incorrect');
