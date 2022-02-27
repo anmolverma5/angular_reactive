@@ -8,7 +8,6 @@ router.post('/',
         if (row.length === 0) {
             return res.sendStatus(401);
         }
-
         const isCorrectPassword = authentication.comparePassword(
             req.body.password,
             row[0].password
@@ -22,6 +21,11 @@ router.post('/',
             expiresIn: '2h'
         });
         res.send({ token });
+        return res.json({
+            success: 1,
+            message: 'login successfully',
+            token: token
+        });
 
     }
 );

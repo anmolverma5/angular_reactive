@@ -1,9 +1,14 @@
+require("dotenv").config({ path: "./variables.env" });
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
 const authenticate = require("./routes/auth");
 const register = require("./routes/register");
+const userData = require("./routes/userdata");
+const logout = require("./routes/logout");
+
+const { options } = require("./routes/auth");
 
 
 app.use("*", cors());
@@ -39,9 +44,29 @@ app.use(function (req, res, next) {
 app.get("/ping", (req, res, next) => {
     res.status(200).send("OK");
 });
+function authenticateToken(req, res, next) {
+    const authHeader = req.headers['authorization']
+    const token = authHeader && authHeader.split(' ')[1]
+
+    if (token == null) return res.sendStatus(401)
+
+    jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
+        console.log(err)
+
+        if (err) return res.sendStatus(403)
+
+        req.user = user
+
+        next()
+    })
+}
 
 app.use("/api/authenticate", authenticate);
 app.use("/users", register);
+app.use("/userData", authenticateToken, userData);
+app.use("/logout", authenticateToken, logout);
+
+
 
 
 
