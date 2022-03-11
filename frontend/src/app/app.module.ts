@@ -11,6 +11,7 @@ import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { WelcomeComponent } from './components/welcome/welcome.component';
 
 
 
@@ -21,7 +22,8 @@ import { SignupComponent } from './components/signup/signup.component';
     SignupComponent,
     HomeComponent,
     NavbarComponent,
-    NotfoundComponent
+    NotfoundComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,

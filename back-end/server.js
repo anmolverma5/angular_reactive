@@ -1,8 +1,10 @@
 require("dotenv").config({ path: "./variables.env" });
+require("dotenv").config({ path: "../.env" });
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
+const jwt = require('jsonwebtoken');
 const authenticate = require("./routes/auth");
 const register = require("./routes/register");
 const userData = require("./routes/userdata");
@@ -50,7 +52,7 @@ function authenticateToken(req, res, next) {
 
     if (token == null) return res.sendStatus(401)
 
-    jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
+    jwt.verify(token, "" + process.env.JWT_KEY, (err, user) => {
         console.log(err)
 
         if (err) return res.sendStatus(403)
@@ -64,7 +66,7 @@ function authenticateToken(req, res, next) {
 app.use("/api/authenticate", authenticate);
 app.use("/users", register);
 app.use("/userData", authenticateToken, userData);
-app.use("/logout", logout);
+app.use("/logout", authenticateToken, logout);
 
 
 

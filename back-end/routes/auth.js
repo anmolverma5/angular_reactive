@@ -11,6 +11,7 @@ router.post('/',
         //         password: hash
         //     })
 
+
         if (!email) {
             return res.json({ success: false, message: 'email is required' });
         } else if (!password) {
@@ -24,7 +25,7 @@ router.post('/',
             .then(function (result) {
                 if (!result || !result[0]) {  // not found!
                     console.log('invalid username');
-                    return res.json({ success: false, message: 'invalid username' });
+                    return res.status(401).json({ success: false, message: 'invalid username' });
                     // report invalid username
                 }
                 var pass = result[0].password;
@@ -38,7 +39,7 @@ router.post('/',
                 } else {
                     // failed login
                     console.log('Password Incorrect');
-                    return res.json({ success: false, message: 'Faild To Login' });
+                    return res.status(401).json({ success: false, message: 'Faild To Login' });
                 }
             })
             .catch(function (error) {
