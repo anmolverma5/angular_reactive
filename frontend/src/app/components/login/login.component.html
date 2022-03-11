@@ -1,36 +1,36 @@
 <html>
+
 <body class="flex">
     <div class="container">
-        <form novalidate [formGroup]="loginForm" (ngSubmit)="save()"   class="form">
+        <form novalidate [formGroup]="loginForm" (ngSubmit)="save()" class="form">
             <div class="header">
                 <h2 style="color:#9b59b6">Login </h2>
             </div>
             <div class="form-control-custom">
                 <label for="username">Email</label>
-                <input type="text" id="emailid" name="emailid" placeholder="Enter Email Address" required
-                [ngClass]="{'is-invalid': (loginForm.get('email')?.touched || loginForm.get('email')?.dirty)}"
-                formControlName="email" 
-                />
+                <input type="email" id="emailid" name="emailid" placeholder="Enter Email Address"
+                    formControlName="email"
+                    [ngClass]="{'is-invalid': (loginForm.get('email')?.touched || loginForm.get('email')?.dirty && !loginForm.valid)}" />
                 <span class="invalid-feedback">
                     <span *ngIf="loginForm.get('email')?.errors?.['required']">
-                      Please enter Valid Email
+                        Please enter your Email
+                    </span>
+                    <span *ngIf="loginForm.get('email')?.errors?.['email']">
+                        Please enter the Valid Email
                     </span>
                 </span>
             </div>
             <div class="form-control-custom">
                 <label for="username">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter Password"
-                required
-                minlength="6"
-                [ngClass]="{'is-invalid': (loginForm.get('password')?.touched || loginForm.get('password')?.dirty && !loginForm.valid)}"
-                formControlName="password"
-                />
+                <input type="password" id="password" name="password" placeholder="Enter Password" required minlength="6"
+                    [ngClass]="{'is-invalid': (loginForm.get('password')?.touched || loginForm.get('password')?.dirty && !loginForm.valid)}"
+                    formControlName="password" />
                 <span class="invalid-feedback">
                     <span *ngIf="loginForm.get('password')?.errors?.['required']">
-                      Please enter your Password.
+                        Please enter your Password.
                     </span>
                     <span *ngIf="loginForm.get('password')?.errors?.['minlength']">
-                      The Password must be longer than 6 characters.
+                        The Password must be longer than 6 characters.
                     </span>
                 </span>
             </div>
@@ -42,9 +42,8 @@
                 <small>Error message</small>
             </div> -->
             <div>
-                <button type="submit" name="submit"
-                [title]="loginForm.valid ? 'Save Your entered data': 'Disabled'" 
-                 [disabled]="!loginForm.valid">Submit</button>
+                <button type="submit" name="submit" [title]="loginForm.valid ? 'Save Your entered data': 'Disabled'"
+                    [disabled]="!loginForm.valid">Submit</button>
             </div>
         </form>
     </div>
