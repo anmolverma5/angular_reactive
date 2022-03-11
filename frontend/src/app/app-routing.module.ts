@@ -4,6 +4,8 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { SettingsComponent } from './components/welcome/settings/settings.component';
+import { UserComponent } from './components/welcome/user/user.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 
 const routes: Routes = [
@@ -12,6 +14,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'welcome', component: WelcomeComponent },
+  { path: 'settings', component: SettingsComponent },
+  { path: 'user', component: UserComponent },
   { path: '**', component: NotfoundComponent }
 ];
 

@@ -9,12 +9,6 @@ import { ApiService } from './shared/api.service';
 })
 export class AppComponent implements OnInit {
   constructor(private apiService: ApiService, private router: Router) {
-    this.check();
-
-  }
-
-
-  check() {
 
   }
   title = 'reactive';

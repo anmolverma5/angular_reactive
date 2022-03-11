@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Users } from 'src/app/model/Users';
+import { Emitters } from 'src/app/shared/emitters/emitters';
 import { LoginServiceService } from './login-service.service';
 
 @Component({
@@ -30,8 +31,7 @@ export class LoginComponent implements OnInit {
     this.loginService.authenticateUser(this.loginForm.value).subscribe((token: any) => {
       localStorage.setItem('userToken', JSON.stringify(token));
       this.router.navigate(['/welcome']);
-
-
+      Emitters.authEmitter.emit(false);
     })
   }
 

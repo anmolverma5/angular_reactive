@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { Emitters } from './emitters/emitters';
 
 @Injectable({
   providedIn: 'root'
@@ -23,10 +24,12 @@ export class ApiService {
 
   public isLoggedIn() {
     if (localStorage.getItem('userToken')) {
-      //navigate
+      //navigate\
+      Emitters.authEmitter.emit(true);
       this.isLoggedin = true;
       this.router.navigate(['/welcome']);
     } else {
+      Emitters.authEmitter.emit(false);
       this.isLoggedin = false;
       this.router.navigate(['/signup']);
     }
