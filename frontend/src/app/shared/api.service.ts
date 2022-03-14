@@ -1,17 +1,20 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { NavbarComponent } from '../components/navbar/navbar.component';
 import { Emitters } from './emitters/emitters';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
+  @ViewChild(NavbarComponent) NavbarComponent: NavbarComponent | undefined
   private apiUrl = environment.API_URL;
   isLoggedin: any;
   constructor(private http: HttpClient,
-    private router: Router) { }
+    private router: Router,
+) { }
 
   public getApi(url: string, params: any) {
     return this.http.get(url, params);
@@ -24,14 +27,10 @@ export class ApiService {
 
   public isLoggedIn() {
     if (localStorage.getItem('userToken')) {
-      //navigate\
-      Emitters.authEmitter.emit(true);
-      this.isLoggedin = true;
       this.router.navigate(['/welcome']);
+      NavbarComponent.ngOnInit()
     } else {
-      Emitters.authEmitter.emit(false);
-      this.isLoggedin = false;
-      this.router.navigate(['/signup']);
+      this.router.navigate(['/home']);
     }
   }
 }

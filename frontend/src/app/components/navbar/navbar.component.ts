@@ -9,6 +9,9 @@ import { Emitters } from 'src/app/shared/emitters/emitters';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  static ngOnInit() {
+    throw new Error('Method not implemented.');
+  }
 
   constructor(private router: Router,private apiService: ApiService) {
   }
@@ -16,6 +19,7 @@ export class NavbarComponent implements OnInit {
   isLoggedin: Boolean = true;
 
   ngOnInit(): void {
+    Emitters.authEmitter.emit(false);
     Emitters.authEmitter.subscribe(
       (auth: Boolean)=>{
         this.isLoggedin = auth;
@@ -28,8 +32,6 @@ export class NavbarComponent implements OnInit {
     // {
     //   this.isLoggedin = false;
     // }
-
-    
   }
 
   logout() {
