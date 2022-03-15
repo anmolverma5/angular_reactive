@@ -3,7 +3,6 @@ import { Injectable, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { NavbarComponent } from '../components/navbar/navbar.component';
-import { Emitters } from './emitters/emitters';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +13,7 @@ export class ApiService {
   isLoggedin: any;
   constructor(private http: HttpClient,
     private router: Router,
-) { }
+  ) { }
 
   public getApi(url: string, params: any) {
     return this.http.get(url, params);
@@ -32,5 +31,8 @@ export class ApiService {
     } else {
       this.router.navigate(['/home']);
     }
+  }
+  public userData(url: string, params: any) {
+    return this.http.get(url, params);
   }
 }

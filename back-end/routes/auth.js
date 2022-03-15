@@ -35,7 +35,7 @@ router.post('/',
                         expiresIn: "1h"
                     });
 
-                    res.status(200).send({ auth: true, token: token });
+                    res.status(200).send({ email: email, auth: true, token: token });
                 } else {
                     // failed login
                     console.log('Password Incorrect');
