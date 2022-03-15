@@ -13,7 +13,7 @@ export class NavbarComponent implements OnInit {
     throw new Error('Method not implemented.');
   }
 
-  constructor(private router: Router,private apiService: ApiService) {
+  constructor(private router: Router, private apiService: ApiService) {
   }
 
   isLoggedin: Boolean = true;
@@ -21,17 +21,12 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     Emitters.authEmitter.emit(false);
     Emitters.authEmitter.subscribe(
-      (auth: Boolean)=>{
+      (auth: Boolean) => {
         this.isLoggedin = auth;
-    });
-    // var aValue = localStorage.getItem('userToken');
-    // if (aValue == null) {
-    //   this.isLoggedin = true;
-    // }
-    // else 
-    // {
-    //   this.isLoggedin = false;
-    // }
+      });
+    if (localStorage.getItem('userToken')) {
+      this.isLoggedin = false;
+    }
   }
 
   logout() {

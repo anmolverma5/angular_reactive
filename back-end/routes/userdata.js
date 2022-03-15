@@ -5,8 +5,10 @@ const jwt = require('jsonwebtoken');
 router.get('/',
 
     async (req, res, next) => {
-        console.log('userdata');
-        res.status(200).send({ auth: true, message: 'userdata' });
+        const email = req.body.email ? req.body.email : '';
+        user = JSON.parse(window.localStorage.getItem('user'))
+        console.warn(user);
+        return knex("users").select("*").where("email", "like", "%" + email + "%").then();
     }
 
 );
