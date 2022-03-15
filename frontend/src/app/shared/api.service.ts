@@ -32,7 +32,8 @@ export class ApiService {
       this.router.navigate(['/home']);
     }
   }
-  public userData(url: string, params: any) {
+  public userData( params: any) {
+    const url = `/userData`;
     return this.http.get(url, params);
   }
 }

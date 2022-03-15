@@ -7,7 +7,7 @@ import { ApiService } from 'src/app/shared/api.service';
 export class LoginServiceService {
 
   constructor(private apiService: ApiService) { }
-
+  
   public authenticateUser(values: any) {
     const url = `/authenticate`;
     return this.apiService.postApi(url, values);
