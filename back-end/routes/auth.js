@@ -34,8 +34,7 @@ router.post('/',
                     var token = jwt.sign({ email: "email" }, "" + process.env.JWT_KEY, {
                         expiresIn: "1h"
                     });
-
-                    res.status(200).send({ email: email, auth: true, token: token });
+                    res.status(200).send({ id: result[0].id,email: email, auth: true, token: token });
                 } else {
                     // failed login
                     console.log('Password Incorrect');
