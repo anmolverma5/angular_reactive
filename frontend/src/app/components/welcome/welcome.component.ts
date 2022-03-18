@@ -1,8 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApiService } from 'src/app/shared/api.service';
-import { UserService } from 'src/app/shared/user.service';
 
 @Component({
   selector: 'app-welcome',
@@ -12,11 +10,9 @@ import { UserService } from 'src/app/shared/user.service';
 export class WelcomeComponent implements OnInit {
   user_name: string = "Anmol Verma";
 
-  constructor(private http: HttpClient,private router: Router, private apiService: ApiService,private users: UserService) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
-    const kasa = this.users.getData();
-    console.warn(kasa);
   }
 
 }

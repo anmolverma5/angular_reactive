@@ -21,7 +21,9 @@ export class ApiService {
   public getApi(url: string, params: any) {
     return this.http.get(url, params);
   }
-
+  public getApi_new(url: string, params: any, headers: any) {
+    return this.http.post(url, params, headers);
+  }
   public postApi(url: string, params: any) {
     url = this.apiUrl + url;
     return this.http.post(url, params)
@@ -38,18 +40,17 @@ export class ApiService {
   public getApiCall(url: string, params: any): Observable<any> {
     return this.http.get(url, params);
   }
-  public getUserFromLocalCache(): Users
-  {
+  public getUserFromLocalCache(): Users {
     const user: any = localStorage.getItem('user');
     return JSON.parse(user);
-  } 
+  }
   public getToken() {
-     this.token = localStorage.getItem('token');
+    this.token = localStorage.getItem('token');
     return JSON.parse(this.token);
   }
-  public userData( params: any) {
+  public userData(params: any) {
     const url = `/userData`;
     return this.http.get(url, params);
   }
-  
+
 }

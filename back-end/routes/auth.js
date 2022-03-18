@@ -19,9 +19,16 @@ router.post('/',
         }
         var usernameReq = req.body.email;
         var passwordReq = req.body.password;
+
         knex('users')
             .where({ email: email })
-            .select('password')
+            .select({
+                id: 'id',
+                firstname: 'firstname',
+                lastname: 'lastname',
+                email: 'email',
+                password: 'password',
+            })
             .then(function (result) {
                 if (!result || !result[0]) {  // not found!
                     console.log('invalid username');
@@ -34,7 +41,7 @@ router.post('/',
                     var token = jwt.sign({ email: "email" }, "" + process.env.JWT_KEY, {
                         expiresIn: "1h"
                     });
-                    res.status(200).send({ id: result[0].id,email: email, auth: true, token: token });
+                    res.status(200).send({ id: result[0].id, firstname: result[0].firstname, lastname: result[0].lastname, auth: true, token: token });
                 } else {
                     // failed login
                     console.log('Password Incorrect');

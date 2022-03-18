@@ -47,6 +47,7 @@ app.get("/ping", (req, res, next) => {
     res.status(200).send("OK");
 });
 function authenticateToken(req, res, next) {
+    console.log(req.headers)
     const authHeader = req.headers['authorization']
     const token = authHeader && authHeader.split(' ')[1]
 
