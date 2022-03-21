@@ -10,13 +10,13 @@ import { UserService } from 'src/app/shared/user.service';
   styleUrls: ['./welcome.component.css']
 })
 export class WelcomeComponent implements OnInit {
-  user_name: string = "Anmol Verma";
+  email: any;
 
-  constructor(private http: HttpClient,private router: Router, private apiService: ApiService,private users: UserService) { }
+  constructor(private http: HttpClient,private router: Router, private apiService: ApiService) { }
 
   ngOnInit(): void {
-    const kasa = this.users.getData();
-    console.warn(kasa);
+    this.email = localStorage.getItem('user');
   }
 
 }
+

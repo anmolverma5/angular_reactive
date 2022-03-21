@@ -13,6 +13,7 @@ export class ApiService {
   @ViewChild(NavbarComponent) NavbarComponent: NavbarComponent | undefined
   private apiUrl = environment.API_URL;
   private token: any;
+  public host = environment.host;
   isLoggedin: any;
   constructor(private http: HttpClient,
     private router: Router,
