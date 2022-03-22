@@ -45,6 +45,8 @@ export class ApiService {
     return JSON.parse(user);
   } 
   public getToken() {
+    if(this.token != null && this.token !==""){
+    }
      this.token = localStorage.getItem('token');
     return JSON.parse(this.token);
   }
