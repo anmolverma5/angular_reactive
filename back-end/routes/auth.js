@@ -37,11 +37,11 @@ router.post('/',
                 var pass = result[0].password;
                 if (password === pass) {
                     var privateKey = ('../private.key');
-                    var token = jwt.sign({ email: "email" }, "" + process.env.JWT_KEY, {
+                    var token = jwt.sign({ id: result[0].id,firstname: result[0].firstname,lastname:  result[0].lastname,email: email  }, "" + process.env.JWT_KEY, {
                         expiresIn: "1h"
                     });
                     // res.status(200).send([ result[0].id, result[0].firstname, result[0].lastname, email, true, token ]);
-                    res.status(200).send({token});
+                    res.status(200).send([token]);
                     // res.status(200).send({ id: result[0].id,firstname: result[0].firstname,lastname:  result[0].lastname,email: email, auth: true, token: token });
                 } else {
                     // failed login

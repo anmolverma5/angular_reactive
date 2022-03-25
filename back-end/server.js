@@ -46,27 +46,29 @@ app.use(function (req, res, next) {
 app.get("/ping", (req, res, next) => {
     res.status(200).send("OK");
 });
-function authenticateToken(req, res, next) {
-    const authHeader = req.headers['authorization']
-    const token = authHeader && authHeader.split(' ')[1]
+// function authenticateToken(req, res, next) {
+//     const authHeader1 = req.headers['authorization']
+//     const authHeader = req.body.token
+//     const token = authHeader && authHeader.split(' ')[1]
 
-    if (token == null) return res.sendStatus(401)
+//     if (token == null) return res.sendStatus(401)
 
-    jwt.verify(token, "" + process.env.JWT_KEY, (err, user) => {
-        console.log(err)
+//     jwt.verify(token, "" + process.env.JWT_KEY, (err, user) => {
+//         console.log(err)
 
-        if (err) return res.sendStatus(403)
+//         if (err) return res.sendStatus(403)
 
-        req.user = user
+//         req.user = user
+//         console.warn(user.email);
 
-        next()
-    })
-}
+//     })
+//     next()
+// }
 
 app.use("/api/authenticate", authenticate);
 app.use("/users", register);
-app.use("/userData", authenticateToken, userData);
-app.use("/logout", authenticateToken, logout);
+app.use("/userData",  userData);
+app.use("/logout", logout);
 
 
 
