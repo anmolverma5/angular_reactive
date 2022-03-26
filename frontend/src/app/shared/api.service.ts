@@ -47,12 +47,11 @@ export class ApiService {
   public getToken() {
     if(this.token != null && this.token !==""){
     }
-     this.token = localStorage.getItem('token');
-    return JSON.parse(this.token);
+     this.token = localStorage.getItem('userToken');
+    return this.token;
   }
   public userData( params: any) {
-    const url = `/userData`;
-    return this.http.get(url, params);
+    return this.http.get(`${environment.host}url`, params);
   }
   
 }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from 'src/app/shared/api.service';
+import { UserService } from 'src/app/shared/user.service';
 
 @Component({
   selector: 'app-user',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserComponent implements OnInit {
 
-  constructor() { }
+  constructor(public apiService: UserService) { }
 
   ngOnInit(): void {
   }

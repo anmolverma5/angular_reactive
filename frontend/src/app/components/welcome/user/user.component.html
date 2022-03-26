@@ -1,1 +1,27 @@
-<p>user works!</p>
+<html>
+
+<body class="flex">
+    <div class="container">
+        <form  class="form">
+            <div class="header">
+                <h2 style="color:#9b59b6">User Details </h2>
+            </div>
+            <b *ngFor="let todoitemscount of apiService.todoItemsList$ | async">
+            <div class="form-control-custom" >
+                <label for="username">ID</label> -> {{todoitemscount.id}}
+            </div>
+            <div class="form-control-custom">
+                <label for="username">Email</label> -> {{todoitemscount.email}}
+            </div>
+            <div class="form-control-custom">
+                <label for="username">Name</label> -> {{todoitemscount.firstname}} {{todoitemscount.lastname}}
+            </div>
+            <div class="form-control-custom">
+                <label for="username">Password</label> -> {{todoitemscount.password}}
+            </div>
+        </b>
+        </form>
+    </div>
+</body>
+
+</html>
