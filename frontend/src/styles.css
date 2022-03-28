@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import url("https://fonts.googleapis.com/css?family=Work+Sans:400,600");
+@import "ag-grid-community/dist/styles/ag-grid.css";
+@import "ag-grid-community/dist/styles/ag-theme-alpine.css";
 @font-face {
   font-family: "Work Sans", sans-serif;
   src: url('./assets/fonts/Work_Sans/WorkSans-VariableFont_wght.ttf') format("truetype");
@@ -24,6 +26,9 @@ body {
 }
 h2 {
   color: #9b59b6;
+}
+.container.user {
+  width: 900px;
 }
 .container {
   display: block;

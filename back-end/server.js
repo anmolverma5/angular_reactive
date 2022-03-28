@@ -8,6 +8,7 @@ const jwt = require('jsonwebtoken');
 const authenticate = require("./routes/auth");
 const register = require("./routes/register");
 const userData = require("./routes/userdata");
+const userUpdate = require("./routes/userUpdate");
 const logout = require("./routes/logout");
 
 const { options } = require("./routes/auth");
@@ -46,29 +47,26 @@ app.use(function (req, res, next) {
 app.get("/ping", (req, res, next) => {
     res.status(200).send("OK");
 });
-// function authenticateToken(req, res, next) {
-//     const authHeader1 = req.headers['authorization']
-//     const authHeader = req.body.token
-//     const token = authHeader && authHeader.split(' ')[1]
+function authenticateToken(req, res, next) {
+    const authHeader = req.headers['authorization']
+    const token = authHeader && authHeader.split(' ')[1]
 
-//     if (token == null) return res.sendStatus(401)
+    if (token == null) return res.sendStatus(401)
 
-//     jwt.verify(token, "" + process.env.JWT_KEY, (err, user) => {
-//         console.log(err)
+    jwt.verify(token, "" + process.env.JWT_KEY, (err, user) => {
+        console.log(err)
 
-//         if (err) return res.sendStatus(403)
+        if (err) return res.sendStatus(403)
 
-//         req.user = user
-//         console.warn(user.email);
-
-//     })
-//     next()
-// }
+        req.user = user
+        next()
+    })
+}
 
 app.use("/api/authenticate", authenticate);
 app.use("/users", register);
-app.use("/userData",  userData);
-app.use("/logout", logout);
+app.use("/userData", authenticateToken, userData);
+app.use("/userUpdate", authenticateToken, userUpdate);
 
 
 

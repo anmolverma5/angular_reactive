@@ -42,6 +42,7 @@ export class UserService {
       });
   }
   getData(params = {}) {
+    console.log(this.apiService.getToken());
     return this.apiService.getApiCall(`${environment.host}userData`, params);
   }
   changeMessage(message: any) {
