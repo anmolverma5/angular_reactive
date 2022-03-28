@@ -32,8 +32,8 @@
         <li *ngIf="isLoggedin"><a [routerLink]="['signup']">Signup</a></li>
         <li *ngIf="!isLoggedin"><a [routerLink]="['welcome']">Welcome</a></li>
         <li *ngIf="!isLoggedin"><a [routerLink]="['user']">User</a></li>
-        <li *ngIf="!isLoggedin"><a [routerLink]="['settings']">Settings</a></li>
-        <li *ngIf="!isLoggedin"><a   (click)="logout()">Logout</a></li>
+        <!-- <li *ngIf="!isLoggedin"><a [routerLink]="['settings']">Settings</a></li> -->
+        <li *ngIf="!isLoggedin"><a (click)="logout()">Logout</a></li>
       </ul>
     </nav>
   </div>

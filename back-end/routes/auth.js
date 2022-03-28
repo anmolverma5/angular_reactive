@@ -26,6 +26,7 @@ router.post('/',
                 firstname: 'firstname',
                 lastname: 'lastname',
                 email: 'email',
+                is_admin: 'is_admin',
                 password: 'password',
             })
             .then(function (result) {
@@ -37,7 +38,7 @@ router.post('/',
                 var pass = result[0].password;
                 if (password === pass) {
                     var privateKey = ('../private.key');
-                    var token = jwt.sign({ id: result[0].id,firstname: result[0].firstname,lastname:  result[0].lastname,email: email  }, "" + process.env.JWT_KEY, {
+                    var token = jwt.sign({ id: result[0].id, is_admin: result[0].is_admin, firstname: result[0].firstname, lastname: result[0].lastname, email: email }, "" + process.env.JWT_KEY, {
                         expiresIn: "1h"
                     });
                     // res.status(200).send([ result[0].id, result[0].firstname, result[0].lastname, email, true, token ]);

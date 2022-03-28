@@ -1,25 +1,34 @@
 <html>
 
 <body class="flex">
-    <div class="container">
-        <form  class="form">
+    <div class="container user">
+        <form class="form">
             <div class="header">
                 <h2 style="color:#9b59b6">User Details </h2>
             </div>
-            <b *ngFor="let todoitemscount of apiService.todoItemsList$ | async">
-            <div class="form-control-custom" >
-                <label for="username">ID</label> -> {{todoitemscount.id}}
+            <div *ngIf="is_admin == 3">
+                <button (click)="getSelectedRows()">Get Selected Rows</button>
+                <ag-grid-angular style="width: 800px; height: 300px;" class="ag-theme-alpine"
+                    [rowData]="rowData | async" [columnDefs]="columnDefs" rowSelection="multiple"
+                    (cellValueChanged)="onCellValueChanged($event)">
+                </ag-grid-angular>
             </div>
-            <div class="form-control-custom">
-                <label for="username">Email</label> -> {{todoitemscount.email}}
+            <div *ngIf="is_admin == 1">
+                <b *ngFor="let todoitemscount of userService.todoItemsList$ | async">
+                    <div class="form-control-custom">
+                        <label for="username">ID</label> -> {{todoitemscount.id}}
+                    </div>
+                    <div class="form-control-custom">
+                        <label for="username">Email</label> -> {{todoitemscount.email}}
+                    </div>
+                    <div class="form-control-custom">
+                        <label for="username">Name</label> -> {{todoitemscount.firstname}} {{todoitemscount.lastname}}
+                    </div>
+                    <div class="form-control-custom">
+                        <label for="username">Password</label> -> {{todoitemscount.password}}
+                    </div>
+                </b>
             </div>
-            <div class="form-control-custom">
-                <label for="username">Name</label> -> {{todoitemscount.firstname}} {{todoitemscount.lastname}}
-            </div>
-            <div class="form-control-custom">
-                <label for="username">Password</label> -> {{todoitemscount.password}}
-            </div>
-        </b>
         </form>
     </div>
 </body>

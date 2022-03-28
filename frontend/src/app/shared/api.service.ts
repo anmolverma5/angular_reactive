@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import jwt_decode from 'jwt-decode';
 import { Observable } from 'rxjs/internal/Observable';
 import { environment } from 'src/environments/environment';
 import { NavbarComponent } from '../components/navbar/navbar.component';
@@ -18,7 +19,11 @@ export class ApiService {
   constructor(private http: HttpClient,
     private router: Router,
   ) { }
-
+  getTransferIp() {
+    return new HttpHeaders().set(
+      "Authorization", `Bearer ${this.token}`
+    );
+  }
   public getApi(url: string, params: any) {
     return this.http.get(url, params);
   }
@@ -27,7 +32,13 @@ export class ApiService {
     url = this.apiUrl + url;
     return this.http.post(url, params)
   }
-
+  public getDecodedAccessToken(): any {
+    try {
+      return jwt_decode(this.token);
+    } catch (Error) {
+      return null;
+    }
+  }
   public isLoggedIn() {
     if (localStorage.getItem('userToken')) {
       this.router.navigate(['/welcome']);
@@ -36,22 +47,24 @@ export class ApiService {
       this.router.navigate(['/home']);
     }
   }
+
   public getApiCall(url: string, params: any): Observable<any> {
-    return this.http.get(url, params);
+    return this.http.get(url, { headers: this.getTransferIp() });
   }
-  public getUserFromLocalCache(): Users
-  {
+  public getUserFromLocalCache(): Users {
     const user: any = localStorage.getItem('user');
     return JSON.parse(user);
-  } 
+  }
   public getToken() {
-    if(this.token != null && this.token !==""){
-    }
-     this.token = localStorage.getItem('userToken');
+    this.token = localStorage.getItem('userToken');
     return this.token;
   }
-  public userData( params: any) {
+  public userData(params: any) {
     return this.http.get(`${environment.host}url`, params);
   }
-  
+  public updateUser(person: Users): Observable<any> {
+    const body = person;
+    return this.http.post(`${environment.host}` + 'userUpdate', body, { headers: this.getTransferIp() })
+  }
+
 }
