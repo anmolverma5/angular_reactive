@@ -65,7 +65,8 @@
         <div class="form-control-custom">
           <label for="username">Confirm Password</label>
           <input type="password" id="cpassword" name="cpassword" placeholder="Confirm Password"
-            formControlName="cpassword" [ngClass]="{'is-invalid': signupForm.get('passwordGroup')?.errors ||
+            formControlName="cpassword" 
+            [ngClass]="{'is-invalid': signupForm.get('passwordGroup')?.errors ||
                 ((signupForm.get('passwordGroup.cpassword')?.touched || 
                 signupForm.get('passwordGroup.cpassword')?.dirty) && 
                  !signupForm.get('passwordGroup.cpassword')?.valid) }" />
