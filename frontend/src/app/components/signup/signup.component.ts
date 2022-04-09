@@ -5,8 +5,8 @@ import { Users } from 'src/app/model/Users';
 import { ApiService } from './api.service';
 
 
-function confirm_password(): ValidatorFn {
-  return (c: AbstractControl): { [key: string]: boolean } | null | any => {
+function confirm_password()
+{ (c: AbstractControl): { [key: string]: boolean } | null | any => {
     let password = c.get('password');
     let cpassword = c.get('cpassword');
     alert(cpassword);
@@ -40,7 +40,7 @@ export class SignupComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       passwordGroup: this.fb.group({
         password: ['', [Validators.required, Validators.minLength(6)]],
-        cpassword: ['', [Validators.required]]
+        cpassword: ['', [Validators.required , Validators.minLength(6)]]
       }, { validators: confirm_password }),
     })
   }
