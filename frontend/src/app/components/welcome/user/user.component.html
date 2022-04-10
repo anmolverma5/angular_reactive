@@ -10,7 +10,7 @@
                 <button (click)="getSelectedRows()">Get Selected Rows</button>
                 <ag-grid-angular style="width: 800px; height: 300px;" class="ag-theme-alpine"
                     [rowData]="rowData | async" [columnDefs]="columnDefs" rowSelection="multiple"
-                    (cellValueChanged)="onCellValueChanged($event)">
+                    (cellValueChanged)="onCellValueChanged($event)" [frameworkComponents]="frameworkComponents">
                 </ag-grid-angular>
             </div>
             <div *ngIf="is_admin == 1">
