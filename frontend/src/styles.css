@@ -2,34 +2,39 @@
 @import url("https://fonts.googleapis.com/css?family=Work+Sans:400,600");
 @import "ag-grid-community/dist/styles/ag-grid.css";
 @import "ag-grid-community/dist/styles/ag-theme-alpine.css";
+
 @font-face {
   font-family: "Work Sans", sans-serif;
   src: url('./assets/fonts/Work_Sans/WorkSans-VariableFont_wght.ttf') format("truetype");
 }
 
 
-body { 
-    background: url(./assets/images/bgpic2.png) no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    font-family: "Open Sans", sans-serif !important;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    color: #9b59b6;
-  }
+body {
+  background: url(./assets/images/bgpic2.png) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  font-family: "Open Sans", sans-serif !important;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  color: #9b59b6;
+}
 
 
-  @import url("https://fonts.googleapis.com/css?family=Muli&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Muli&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,500&display=swap");
+
 * {
   box-sizing: border-box !important;
 }
+
 h2 {
   color: #9b59b6;
 }
+
 .container.user {
   width: 900px;
 }
+
 .container {
   display: block;
   margin-left: auto;
@@ -42,11 +47,13 @@ h2 {
   width: 400px;
   max-width: 100%;
 }
+
 .header {
   border-bottom: 1px solid #f0f0f0;
   background-color: #f7f7f7;
   padding: 20px 40px;
 }
+
 .header h2 {
   margin: 0;
 }
@@ -63,6 +70,7 @@ h2 {
 .form-control-custom label {
   margin-bottom: 5px;
 }
+
 .form-control-custom input {
   border: 2px solid #f0f0f0;
   border-radius: 4px;
@@ -72,17 +80,21 @@ h2 {
   padding: 10px;
   width: 100%;
 }
+
 .male {
   position: absolute;
 }
+
 .female {
   position: absolute;
   top: 45px;
 }
+
 .form-control-custom input:focus {
   outline: 0;
   border-color: #777;
 }
+
 .form-control-custom.success input {
   border-color: #2ecc71;
 }
@@ -90,12 +102,14 @@ h2 {
 .form-control-custom.error input {
   border-color: #e74c3c;
 }
+
 .form-control-custom i {
   visibility: hidden;
   position: absolute;
   top: 35px;
   right: 1px;
 }
+
 .form-control-custom.success i.fa-check-circle {
   color: #2ecc71;
   visibility: visible;
@@ -105,6 +119,7 @@ h2 {
   color: #e74c3c;
   visibility: visible;
 }
+
 .form-control-custom small {
   color: #e74c3c;
   bottom: 0;
@@ -115,7 +130,8 @@ h2 {
 .form-control-custom.error small {
   visibility: visible;
 }
-.form button {
+
+.form .button {
   background-color: #8e44ad;
   border: 2px solid #8e44ad;
   border-radius: 4px;
@@ -126,4 +142,40 @@ h2 {
   padding: 10px;
   margin-top: 20px;
   width: 100%;
+}
+
+button.action-button {
+  border: none;
+  color: white;
+  padding: 3px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  opacity: 0.7;
+}
+
+.action-button:hover {
+  opacity: 1;
+}
+
+.action-button.edit {
+  background-color: #008cba;
+  /* Blue */
+}
+
+.action-button.update {
+  background-color: #4caf50;
+  /* Green */
+}
+
+.action-button.delete {
+  background-color: #f44336;
+  /* Red */
+}
+
+.action-button.cancel {
+  background-color: #e7e7e7;
+  /* Gray */
+  color: black;
 }

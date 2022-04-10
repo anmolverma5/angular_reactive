@@ -65,8 +65,7 @@
         <div class="form-control-custom">
           <label for="username">Confirm Password</label>
           <input type="password" id="cpassword" name="cpassword" placeholder="Confirm Password"
-            formControlName="cpassword" 
-            [ngClass]="{'is-invalid': signupForm.get('passwordGroup')?.errors ||
+            formControlName="cpassword" [ngClass]="{'is-invalid': signupForm.get('passwordGroup')?.errors ||
                 ((signupForm.get('passwordGroup.cpassword')?.touched || 
                 signupForm.get('passwordGroup.cpassword')?.dirty) && 
                  !signupForm.get('passwordGroup.cpassword')?.valid) }" />
@@ -83,9 +82,9 @@
           </span>
         </div>
       </div>
-      <button type="submit" name="submit" [title]="signupForm.valid ? 'Save Your entered data': 'Disabled'"
-        [disabled]="!signupForm.valid">Submit</button>
-      <!-- <br>Dirty: {{ signupForm.dirty }}
+      <<button type="submit" class="button" class="button" class="button" name="submit"
+        [title]="signupForm.valid ? 'Save Your entered data': 'Disabled'" [disabled]="!signupForm.valid">Submit</button>
+        <!-- <br>Dirty: {{ signupForm.dirty }}
                  <br>Touched: {{ signupForm.touched }}
                  <br>Valid: {{ signupForm.valid }}
                  <br>Value: {{ signupForm.value | json }} -->

@@ -12,6 +12,7 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
+import { BtnCellRenderer } from './components/renderer/btn-cell-renderer.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { SettingsComponent } from './components/welcome/settings/settings.component';
 import { UserComponent } from './components/welcome/user/user.component';
@@ -31,6 +32,7 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
     WelcomeComponent,
     UserComponent,
     SettingsComponent,
+    BtnCellRenderer
   ],
   imports: [
     BrowserModule,
@@ -40,7 +42,7 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
     ReactiveFormsModule,
     NgbModule,
     HttpClientModule,
-    AgGridModule.withComponents([])
+    AgGridModule.withComponents([BtnCellRenderer])
   ],
   providers: [],
   bootstrap: [AppComponent]
