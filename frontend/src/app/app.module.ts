@@ -2,6 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AgGridModule } from 'ag-grid-angular';
@@ -44,7 +45,12 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
     HttpClientModule,
     AgGridModule.withComponents([BtnCellRenderer])
   ],
-  providers: [],
+  providers: [{
+    provide: JWT_OPTIONS, useValue: JWT_OPTIONS
+  },
+    JwtHelperService
+  ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

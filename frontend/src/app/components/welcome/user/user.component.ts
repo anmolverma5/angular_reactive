@@ -75,11 +75,11 @@ export class UserComponent implements OnInit {
       },
     ];
   }
-  onCellClicked(params: CellValueChangedEvent) {
-    var changedData = [params.data];
-    this.user = params.data;
-    console.log(this.user);
-  }
+  // onCellClicked(params: CellValueChangedEvent) {
+  //   var changedData = [params.data];
+  //   this.user = params.data;
+  //   console.log(this.user);
+  // }
   onFirstDataRendered(params: FirstDataRenderedEvent) {
     params.api.sizeColumnsToFit();
   }
