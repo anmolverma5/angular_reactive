@@ -9,8 +9,10 @@
             <div *ngIf="is_admin == 3">
                 <button (click)="getSelectedRows()">Get Selected Rows</button>
                 <ag-grid-angular style="width: 800px; height: 300px;" class="ag-theme-alpine"
-                    [rowData]="rowData | async" [columnDefs]="columnDefs" rowSelection="multiple"
-                    (cellValueChanged)="onCellValueChanged($event)" [frameworkComponents]="frameworkComponents">
+                    [defaultColDef]="defaultColDef" [rowData]="rowData | async" [columnDefs]="columnDefs"
+                    (firstDataRendered)="onFirstDataRendered($event)" rowSelection="multiple"
+                    (cellClicked)="onCellClicked(params)" (cellValueChanged)="onCellValueChanged($event)"
+                    [frameworkComponents]="frameworkComponents">
                 </ag-grid-angular>
             </div>
             <div *ngIf="is_admin == 1">

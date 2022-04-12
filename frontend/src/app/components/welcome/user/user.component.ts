@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
-import { CellValueChangedEvent, ColDef } from 'ag-grid-community';
+import { CellValueChangedEvent, ColDef, FirstDataRenderedEvent } from 'ag-grid-community';
 import { Observable } from 'rxjs';
 import { ApiService } from 'src/app/shared/api.service';
 import { UserService } from 'src/app/shared/user.service';
@@ -42,11 +42,12 @@ function actionCellRenderer(params: { api: { getEditingCells: () => any; }; node
 export class UserComponent implements OnInit {
   @ViewChild('agGrid') agGrid!: AgGridAngular;
   is_admin: any;
-  private params: any;
+  params: any;
   columnDefs: ColDef[] = [];
   user: any;
   Data: any;
   frameworkComponents: any;
+  defaultColDef: any;
   agInit(params: any): void {
     this.params = params;
   }
@@ -54,6 +55,9 @@ export class UserComponent implements OnInit {
     this.params.clicked(this.params.value);
   }
   ngOnInit(): void {
+    this.defaultColDef = {
+      resizable: true,
+    };
     this.columnDefs = [
       // Option 1: using field for getting and setting the value
       { field: 'id', sortable: true, filter: true },
@@ -64,20 +68,20 @@ export class UserComponent implements OnInit {
       {
         headerName: "action",
         minWidth: 150,
-        cellRenderer: actionCellRenderer,
+        cellRenderer: BtnCellRenderer,
         editable: false,
         colId: "action",
         headerClass: 'my-header-class',
-        cellRendererParams: {
-          clicked: function (field: any) {
-            alert(`${field} was clicked`);
-          }
-        },
-      }
+      },
     ];
-    this.frameworkComponents = {
-      btnCellRenderer: BtnCellRenderer
-    };
+  }
+  onCellClicked(params: CellValueChangedEvent) {
+    var changedData = [params.data];
+    this.user = params.data;
+    console.log(this.user);
+  }
+  onFirstDataRendered(params: FirstDataRenderedEvent) {
+    params.api.sizeColumnsToFit();
   }
   onCellValueChanged(params: CellValueChangedEvent) {
     var changedData = [params.data];
@@ -96,7 +100,9 @@ export class UserComponent implements OnInit {
 
     alert(`Selected nodes: ${selectedDataStringPresentation}`);
   }
-
+  assign() {
+    alert('hello');
+  }
   rowData: Observable<any[]>;
   constructor(public userService: UserService, private apiService: ApiService, private http: HttpClient) {
     const tokenInfo = this.apiService.getDecodedAccessToken();
