@@ -24,6 +24,8 @@ router.post('/',
             return res.json({ success: false, message: 'email is required' });
         } else if (!password) {
             return res.json({ success: false, message: 'password is required' });
+        } else if (!id) {
+            return res.json({ success: false, message: 'id is required' });
         }
         knex("users")
             .update({ firstname, lastname, email, password })
